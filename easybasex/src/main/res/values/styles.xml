@@ -1,0 +1,50 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--MyDialog-->
+    <style name="MyDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">#00000000</item>
+    </style>
+
+    <style name="QmuiTheme" parent="QMUI.Compat.NoActionBar">
+        <item name="qmui_config_color_blue">@color/colorPrimary</item>
+        <item name="app_primary_color">@color/colorPrimary</item>
+        <item name="app_content_bg_primary_color">@color/frame_white_background_color</item>
+        <item name="app_content_bg_color">@color/frame_gray_background_color</item>
+        <item name="app_text_black_color">@color/text_black_color</item>
+        <item name="app_text_white_color">@color/text_white_color</item>
+    </style>
+
+    <style name="QDTopBar" parent="QMUI.TopBar">
+        <item name="qmui_bottomDividerHeight">0px</item>
+        <item name="qmui_topbar_left_back_drawable_id">@drawable/ic_back</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="qmui_topbar_image_btn_width">38dp</item>
+    </style>
+
+    <style name="loading_dialog_no_shadow" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--true表示是浮动窗口-->
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="loading_dialog_with_shadow" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--true表示是浮动窗口-->
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+</resources>
