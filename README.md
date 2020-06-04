@@ -1,6 +1,6 @@
 EasyBaseX
 -
-[![](https://jitpack.io/v/enChenging/EasyBase.svg)](https://jitpack.io/#enChenging/EasyBaseX)
+[![](https://jitpack.io/v/enChenging/EasyBaseX.svg)](https://jitpack.io/#enChenging/EasyBaseX)
 
 ## 用法
 
