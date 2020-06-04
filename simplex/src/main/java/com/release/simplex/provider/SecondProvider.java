@@ -13,6 +13,7 @@ import com.release.easybasex.utils.DensityUtil;
 import com.release.simplex.R;
 import com.release.simplex.downLoad.DownLoadActivity;
 import com.release.simplex.mvp.model.SecondNode;
+import com.release.simplex.ui.act.ImageViewScaleTypeActivity;
 import com.release.simplex.ui.act.ScreenshotAndWindowFloatActivity;
 import com.release.simplex.ui.act.VLayoutActivity;
 import com.release.simplex.ui.act.WebViewPlusActivity;
@@ -83,6 +84,9 @@ public class SecondProvider extends BaseNodeProvider {
                     break;
                 case "下载":
                     context.startActivity(new Intent(context, DownLoadActivity.class));
+                    break;
+                case "ImageView的ScaleType":
+                    context.startActivity(new Intent(context, ImageViewScaleTypeActivity.class));
                     break;
             }
         }

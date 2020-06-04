@@ -23,6 +23,9 @@ public final class ImageLoader {
         throw new RuntimeException("ImageLoader cannot be initialized!");
     }
 
+    public static void load(Context context, String url, ImageView view, int defaultResId) {
+        Glide.with(context).load(url).dontAnimate().placeholder(defaultResId).into(view);
+    }
 
     public static void loadFit(Context context, String url, ImageView view, int defaultResId) {
         Glide.with(context).load(url).fitCenter().dontAnimate().placeholder(defaultResId).into(view);

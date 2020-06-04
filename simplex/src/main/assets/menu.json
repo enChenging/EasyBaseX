@@ -26,15 +26,10 @@
       ]
     },
     {
-      "title": "first1-2",
+      "title": "控件属性",
       "second": [
         {
-          "title": "first2-1",
-          "third": [
-            {
-              "title": "first3-1"
-            }
-          ]
+          "title": "ImageView的ScaleType"
         }
       ]
     }

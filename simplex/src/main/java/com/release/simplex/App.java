@@ -66,7 +66,9 @@ public class App extends BaseApplication {
     private void initConfig() {
 //        QMUISwipeBackActivityManager.init(application);
         SPUtil.getInstance(this);
-        CrashHandler.getInstance().init(this);
+
+        if (BuildConfig.DEBUG)
+            CrashHandler.getInstance().init(this);
 
         PrettyFormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)  // 隐藏线程信息 默认：显示

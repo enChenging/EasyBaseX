@@ -30,6 +30,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".downLoad.DownLoadActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.act.ScreenshotAndWindowFloatActivity"
             android:launchMode="singleTop" />
@@ -41,9 +43,8 @@
             android:name=".ui.act.VLayoutActivity"
             android:launchMode="singleTop" />
         <activity android:name=".ui.act.TimerAnimationActivity"
-            android:launchMode="singleTop"
-            />
-        <activity android:name=".downLoad.DownLoadActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".ui.act.ImageViewScaleTypeActivity"
             android:launchMode="singleTop"
             />
     </application>
