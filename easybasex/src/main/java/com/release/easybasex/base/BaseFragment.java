@@ -19,7 +19,7 @@ import butterknife.Unbinder;
  * @create 2019/3/22
  * @Describe
  */
-public abstract class BaseFragment extends Fragment implements UiInterfaceFrag, IView {
+public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
 
 
     /**
@@ -56,7 +56,7 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag, 
         }
         try {
             mUnbinder = ButterKnife.bind(this, view);
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -110,11 +110,5 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag, 
             e.printStackTrace();
         }
         super.onDestroyView();
-    }
-
-
-    @Override
-    public void loadData(Object data) {
-
     }
 }

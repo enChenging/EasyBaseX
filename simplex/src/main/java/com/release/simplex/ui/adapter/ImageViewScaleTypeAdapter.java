@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.release.easybasex.utils.DefIconFactory;
 import com.release.easybasex.utils.ImageLoader;
 import com.release.simplex.R;
+import com.release.simplex.utils.Constants;
 
 import java.util.List;
 
@@ -57,7 +58,6 @@ public class ImageViewScaleTypeAdapter extends BaseQuickAdapter<String, BaseView
                 break;
         }
 
-        ImageLoader.load(getContext(), "https://cms-bucket.ws.126.net/2020/0604/2d48661bp00qbdjof0031c0009c005uc.png", imageView, DefIconFactory.provideIcon());
-//        ImageLoader.loadCenterCrop(getContext(), "https://img-blog.csdnimg.cn/20190803153831848.png", imageView, DefIconFactory.provideIcon());
+        ImageLoader.load(getContext(), Constants.TEMP_IMAGE, imageView, DefIconFactory.provideIcon());
     }
 }

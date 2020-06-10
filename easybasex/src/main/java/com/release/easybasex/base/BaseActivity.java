@@ -43,7 +43,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
  * @create 2019/3/22
  * @Describe
  */
-public abstract class BaseActivity<T extends Presenter> extends AppCompatActivity implements
+public abstract class BaseActivity extends AppCompatActivity implements
         SwipeBackActivityBase, UiInterfaceAct {
 
     protected static String TAG;

@@ -27,10 +27,6 @@ public final class ImageLoader {
         Glide.with(context).load(url).dontAnimate().placeholder(defaultResId).into(view);
     }
 
-    public static void loadFit(Context context, String url, ImageView view, int defaultResId) {
-        Glide.with(context).load(url).fitCenter().dontAnimate().placeholder(defaultResId).into(view);
-    }
-
     public static void loadCenterCrop(Context context, String url, ImageView view, int defaultResId) {
         Glide.with(context).load(url).centerCrop().dontAnimate().placeholder(defaultResId).into(view);
     }
@@ -39,9 +35,14 @@ public final class ImageLoader {
         Glide.with(context).load(url).fitCenter().dontAnimate().placeholder(defaultResId).into(view);
     }
 
+    public static void loadCenterInside(Context context, String url, ImageView view, int defaultResId) {
+        Glide.with(context).load(url).centerInside().dontAnimate().placeholder(defaultResId).into(view);
+    }
+
     public static void loadCircleCrop(Context context, String url, ImageView view, int defaultResId) {
         Glide.with(context).load(url).circleCrop().dontAnimate().placeholder(defaultResId).into(view);
     }
+
 
     //设置跳过内存缓存
     public static void loadImageViewCache(Context mContext, String path, ImageView mImageView) {

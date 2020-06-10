@@ -1,5 +1,6 @@
 package com.release.simplex;
 
+import android.Manifest;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.entity.node.BaseNode;
+import com.release.cameralibrary.PermissionUtils;
 import com.release.easybasex.base.BaseMvpActivity;
 import com.release.simplex.mvp.contract.MainContract;
 import com.release.simplex.mvp.model.FirstNode;
@@ -66,7 +68,14 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
         mAdapter = new DataAdapter();
         mAdapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInLeft);
         mRvList.setAdapter(mAdapter);
+
+        PermissionUtils.checkAndReqkPermission(this, needPermissions);
     }
+
+    public String[] needPermissions = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
     @Override
     public void initListener() {
