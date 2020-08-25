@@ -22,6 +22,11 @@ public interface IView<T> {
     void hideLoading();
 
     /**
+     * 显示提示信息
+     */
+    void showMsg(String msg);
+
+    /**
      * 显示网络异常，点击重试
      */
     void showError();
