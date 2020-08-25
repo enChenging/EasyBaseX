@@ -81,5 +81,8 @@ public abstract class BaseMvpFragment<V extends IView, P extends IPresenter<V>> 
         mPresenter = null;
     }
 
+    @Override
+    public void showMsg(String msg) {
 
+    }
 }

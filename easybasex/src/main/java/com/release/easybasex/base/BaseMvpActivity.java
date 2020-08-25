@@ -74,4 +74,9 @@ public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> 
     public void loadData(Object data) {
 
     }
+
+    @Override
+    public void showMsg(String msg) {
+
+    }
 }

@@ -53,7 +53,7 @@ dependencies {
     api 'com.github.ybq:Android-SpinKit:1.4.0'//加载动画
     //    api 'com.squareup.okhttp3:okhttp:3.12.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.12.1'
-    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.3'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
     api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     api 'com.flyco.labelview:FlycoLabelView_Lib:1.0.2@aar'
     api 'com.github.Rukey7:TagLayout:1.0.6'//多功能的标签流布局
