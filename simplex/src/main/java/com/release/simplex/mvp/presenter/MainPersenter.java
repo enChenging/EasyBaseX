@@ -22,6 +22,7 @@ public class MainPersenter extends BasePresenter<MainContract.View> implements M
     @Override
     public void requestData(boolean isRefresh) {
         mView.loadData(null);
+//        mView.showLoading();
     }
 
     @Override

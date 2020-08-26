@@ -15,8 +15,6 @@ import com.release.easybasex.widget.EmptyLayout;
 public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> extends BaseActivity implements IView {
 
     protected P mPresenter;
-    protected EmptyLayout mEmptyLayout;
-
     protected abstract P createPresenter();
 
     @Override
@@ -29,39 +27,26 @@ public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mEmptyLayout = findViewById(R.id.empty_layout);
     }
 
     @Override
     public void showLoading() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_LOADING);
-        }
+       super.showLoading();
     }
 
     @Override
     public void hideLoading() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.hide();
-        }
+       super.hideLoading();
     }
 
     @Override
     public void showError() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_NO_NET);
-            mEmptyLayout.setRetryListener(new EmptyLayout.OnRetryListener() {
-                @Override
-                public void onRetry() {
-                    startNet();
-                }
-            });
-        }
+       super.showError();
     }
 
     @Override
     public void showError(String msg) {
-        ToastUtils.show(msg);
+       super.showError();
     }
 
     @Override

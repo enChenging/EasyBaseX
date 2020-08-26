@@ -25,6 +25,7 @@ import com.release.easybasex.utils.KeyBoardUtils;
 import com.release.easybasex.utils.SPUtil;
 import com.release.easybasex.utils.StatusBarUtil;
 import com.release.easybasex.utils.ToastUtils;
+import com.release.easybasex.widget.EmptyLayout;
 import com.release.easybasex.widget.dialog.TipLoadDialog;
 import com.release.itoolbar.IToolBar;
 
@@ -49,6 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     protected static String TAG;
     protected NetworkChangeReceiver mNetworkChangeReceiver;
     protected LinearLayoutCompat mBaseView;
+    protected EmptyLayout mEmptyLayout;
     protected IToolBar mTopBar;
     private SwipeBackActivityHelper mHelper;
     private TipLoadDialog mTipLoadDialog;
@@ -73,6 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
         initContentView(getLayoutId());
 
         mTopBar = findViewById(R.id.itb_base_topbar);
+        mEmptyLayout = findViewById(R.id.empty_layout);
 
         ButterKnife.bind(this);
 
@@ -239,9 +242,37 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public void scrollToFinishActivity() {
         Utils.convertActivityToTranslucent(this);
         getSwipeBackLayout().scrollToFinishActivity();
-        ;
     }
 
+    public void showLoading() {
+        if (mEmptyLayout != null) {
+            mEmptyLayout.show();
+            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_LOADING);
+        }
+    }
+
+    public void hideLoading() {
+        if (mEmptyLayout != null) {
+            mEmptyLayout.hide();
+        }
+    }
+
+    public void showError() {
+        if (mEmptyLayout != null) {
+            mEmptyLayout.show();
+            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_NO_NET);
+            mEmptyLayout.setRetryListener(new EmptyLayout.OnRetryListener() {
+                @Override
+                public void onRetry() {
+                    startNet();
+                }
+            });
+        }
+    }
+
+    public void showError(String msg) {
+        ToastUtils.show(msg);
+    }
 
     protected View getNoDataView(RecyclerView recyclerView) {
         View noDataStubView = getLayoutInflater().inflate(R.layout.cyc_layout_empty, (ViewGroup) recyclerView.getParent(), false);

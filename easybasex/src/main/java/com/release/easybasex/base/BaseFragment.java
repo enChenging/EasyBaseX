@@ -32,11 +32,15 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
     private boolean hasLoadData;
     private Unbinder mUnbinder;
     protected Context mContext;
+    private BaseActivity mBaseActivity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
+        if (getActivity() instanceof BaseActivity) {
+            mBaseActivity = (BaseActivity) getActivity();
+        }
     }
 
 
@@ -110,5 +114,17 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
             e.printStackTrace();
         }
         super.onDestroyView();
+    }
+
+    public void showLoading() {
+        if (mBaseActivity != null) mBaseActivity.showLoading();
+    }
+
+    public void hideLoading() {
+        if (mBaseActivity != null) mBaseActivity.hideLoading();
+    }
+
+    public void showError() {
+        if (mBaseActivity != null) mBaseActivity.showError();
     }
 }

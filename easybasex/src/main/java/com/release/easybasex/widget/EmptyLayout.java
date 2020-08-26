@@ -25,6 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 public class EmptyLayout extends FrameLayout {
 
     public static final int STATUS_HIDE = 1001;
+    public static final int STATUS_SHOW = 1002;
     public static final int STATUS_LOADING = 1;
     public static final int STATUS_NO_NET = 2;
     public static final int STATUS_NO_DATA = 3;
@@ -80,6 +81,14 @@ public class EmptyLayout extends FrameLayout {
      */
     public void hide() {
         mEmptyStatus = STATUS_HIDE;
+        _switchEmptyView();
+    }
+
+    /**
+     * 显示视图
+     */
+    public void show() {
+        mEmptyStatus = STATUS_SHOW;
         _switchEmptyView();
     }
 
@@ -153,6 +162,9 @@ public class EmptyLayout extends FrameLayout {
                 break;
             case STATUS_HIDE:
                 setVisibility(GONE);
+                break;
+            case STATUS_SHOW:
+                setVisibility(VISIBLE);
                 break;
         }
     }

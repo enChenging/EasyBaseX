@@ -5,9 +5,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.release.easybasex.R;
 import com.release.easybasex.utils.ToastUtils;
-import com.release.easybasex.widget.EmptyLayout;
 
 
 /**
@@ -18,7 +16,6 @@ import com.release.easybasex.widget.EmptyLayout;
 public abstract class BaseMvpFragment<V extends IView, P extends IPresenter<V>> extends BaseFragment implements IView {
 
     protected P mPresenter;
-    private EmptyLayout mEmptyLayout;
 
     protected abstract P createPresenter();
 
@@ -27,47 +24,32 @@ public abstract class BaseMvpFragment<V extends IView, P extends IPresenter<V>> 
         mPresenter = createPresenter();
         mPresenter.attachView((V) this);
         super.initView(view);
-
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mEmptyLayout = view.findViewById(R.id.empty_layout);
     }
 
     @Override
     public void showLoading() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_LOADING);
-        }
+        super.showLoading();
     }
 
     @Override
     public void hideLoading() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.hide();
-        }
+        super.hideLoading();
     }
 
     @Override
     public void showError() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_NO_NET);
-            mEmptyLayout.setRetryListener(new EmptyLayout.OnRetryListener() {
-                @Override
-                public void onRetry() {
-                    startNet();
-                }
-            });
-        }
+        super.showError();
     }
 
     @Override
     public void showError(String msg) {
         ToastUtils.show(msg);
     }
-
 
     @Override
     public void loadData(Object data) {
