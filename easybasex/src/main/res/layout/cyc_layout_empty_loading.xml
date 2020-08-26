@@ -17,10 +17,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:drawableTop="@mipmap/ic_error_page"
+            android:drawableTop="@mipmap/ic_empty"
             android:drawablePadding="10dp"
             android:gravity="center"
-            android:text="网络异常，点击重试"
+            android:text="@string/no_data"
             android:textSize="16sp" />
     </FrameLayout>
 

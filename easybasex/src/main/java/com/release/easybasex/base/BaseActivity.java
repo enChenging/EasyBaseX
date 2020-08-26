@@ -260,7 +260,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public void showError() {
         if (mEmptyLayout != null) {
             mEmptyLayout.show();
-            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_NO_NET);
+            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_NO_DATA);
             mEmptyLayout.setRetryListener(new EmptyLayout.OnRetryListener() {
                 @Override
                 public void onRetry() {

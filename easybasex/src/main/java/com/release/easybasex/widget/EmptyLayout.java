@@ -3,6 +3,8 @@ package com.release.easybasex.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -118,6 +120,16 @@ public class EmptyLayout extends FrameLayout {
      */
     public void setEmptyMessage(String msg) {
         mTvEmptyMessage.setText(msg);
+    }
+
+    /**
+     * 设置图片
+     * @param drawable
+     */
+    public void setErrorIcon(Drawable drawable) {
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(),
+                drawable.getMinimumHeight());
+        mTvEmptyMessage.setCompoundDrawables(null, drawable, null, null);
     }
 
     public void hideErrorIcon() {

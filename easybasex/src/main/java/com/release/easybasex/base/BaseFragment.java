@@ -7,7 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
+
+import com.release.easybasex.R;
+import com.release.easybasex.widget.EmptyLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -32,15 +36,13 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
     private boolean hasLoadData;
     private Unbinder mUnbinder;
     protected Context mContext;
-    private BaseActivity mBaseActivity;
+    protected LinearLayoutCompat mBaseViewFragment;
+    protected EmptyLayout mEmptyLayoutFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
-        if (getActivity() instanceof BaseActivity) {
-            mBaseActivity = (BaseActivity) getActivity();
-        }
     }
 
 
@@ -48,13 +50,17 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getLayoutId(), null);
+        View baseViewGroup =  LayoutInflater.from(mContext).inflate(R.layout.cyc_fragment_base, null);
+        mBaseViewFragment = baseViewGroup.findViewById(R.id.ll_fragment_base_view);
+        LayoutInflater.from(mContext).inflate(getLayoutId(), mBaseViewFragment, true);
+        return baseViewGroup;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         isViewPrepare = true;
+        mEmptyLayoutFragment = view.findViewById(R.id.empty_layout);
         if (useEventBus()) {
             EventBus.getDefault().register(this);
         }
@@ -117,14 +123,28 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
     }
 
     public void showLoading() {
-        if (mBaseActivity != null) mBaseActivity.showLoading();
+        if (mEmptyLayoutFragment != null) {
+            mEmptyLayoutFragment.show();
+            mEmptyLayoutFragment.setEmptyStatus(EmptyLayout.STATUS_LOADING);
+        }
     }
 
     public void hideLoading() {
-        if (mBaseActivity != null) mBaseActivity.hideLoading();
+        if (mEmptyLayoutFragment != null) {
+            mEmptyLayoutFragment.hide();
+        }
     }
 
     public void showError() {
-        if (mBaseActivity != null) mBaseActivity.showError();
+        if (mEmptyLayoutFragment != null) {
+            mEmptyLayoutFragment.show();
+            mEmptyLayoutFragment.setEmptyStatus(EmptyLayout.STATUS_NO_DATA);
+            mEmptyLayoutFragment.setRetryListener(new EmptyLayout.OnRetryListener() {
+                @Override
+                public void onRetry() {
+                    startNet();
+                }
+            });
+        }
     }
 }
