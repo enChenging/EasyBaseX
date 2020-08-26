@@ -23,7 +23,7 @@ import com.release.easybasex.utils.SPUtil;
  * @create 2019/5/14
  * @Describe
  */
-public abstract class BaseApplication<T> extends Application {
+public abstract class BaseApplication extends Application {
 
     private static BaseApplication sInstance;
 
