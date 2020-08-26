@@ -77,8 +77,10 @@ public abstract class BaseMvpFragment<V extends IView, P extends IPresenter<V>> 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mPresenter.detachView();
-        mPresenter = null;
+        if (mPresenter != null) {
+            mPresenter.detachView();
+            mPresenter = null;
+        }
     }
 
     @Override

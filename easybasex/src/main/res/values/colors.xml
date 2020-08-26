@@ -3,6 +3,7 @@
     <color name="theme_color">#1775ef</color>
     <color name="window_background">#f5f5f5</color>
     <color name="font_normal">#555555</color>
+    <color name="common_color">#19191B</color>
 
     <color name="colorPrimary">#1775ef</color>
     <color name="frame_white_background_color">#ffffff</color>

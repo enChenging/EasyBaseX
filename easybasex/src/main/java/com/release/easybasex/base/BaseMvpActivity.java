@@ -12,10 +12,11 @@ import com.release.easybasex.widget.EmptyLayout;
  * @create 2019/8/2
  * @Describe
  */
-public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>>  extends BaseActivity implements IView{
+public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> extends BaseActivity implements IView {
 
     protected P mPresenter;
     protected EmptyLayout mEmptyLayout;
+
     protected abstract P createPresenter();
 
     @Override
@@ -66,8 +67,10 @@ public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.detachView();
-        mPresenter = null;
+        if (mPresenter != null) {
+            mPresenter.detachView();
+            mPresenter = null;
+        }
     }
 
     @Override

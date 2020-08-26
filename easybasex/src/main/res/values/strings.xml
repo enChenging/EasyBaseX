@@ -1,3 +1,5 @@
 <resources>
     <string name="load_error">加载失败,点击重试</string>
+    <string name="data_error">数据获取失败</string>
+    <string name="no_data">暂无数据</string>
 </resources>
