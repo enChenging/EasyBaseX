@@ -6,17 +6,24 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.multidex.MultiDex;
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
+import com.release.easybasex.BuildConfig;
 import com.release.easybasex.utils.AppManager;
 import com.release.easybasex.utils.AppUtils;
+import com.release.easybasex.utils.CrashHandler;
+import com.release.easybasex.utils.SPUtil;
 
 /**
  * @author Mr.release
  * @create 2019/5/14
  * @Describe
  */
-public abstract class BaseApplication extends Application {
+public abstract class BaseApplication<T> extends Application {
 
     private static BaseApplication sInstance;
 
@@ -35,6 +42,26 @@ public abstract class BaseApplication extends Application {
         super.onCreate();
         AppUtils.init(this);
         setApplication(this);
+        SPUtil.getInstance(this);
+        initConfig();
+    }
+
+    public void initConfig() {
+        if (BuildConfig.DEBUG)
+            CrashHandler.getInstance().init(this);
+        PrettyFormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false)  // 隐藏线程信息 默认：显示
+                .methodCount(0)         // 决定打印多少行（每一行代表一个方法）默认：2
+                .methodOffset(7)        // (Optional) Hides internal method calls up to offset. Default 5
+                .tag("cyc")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
+                .build();
+
+        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
+            @Override
+            public boolean isLoggable(int priority, @Nullable String tag) {
+                return BuildConfig.DEBUG;
+            }
+        });
     }
 
     /**

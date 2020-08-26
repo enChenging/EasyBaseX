@@ -41,7 +41,6 @@ import static com.release.simplex.utils.Constants.PAGE;
 
 public class MainActivity extends BaseMvpActivity<MainContract.View, MainContract.Presenter> implements MainContract.View {
 
-
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
     @BindView(R.id.refresh_layout)
