@@ -12,9 +12,11 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
 /**
- * Created by long on 2016/9/27.
- * 动画帮助类
+ * @author Mr.release
+ * @create 2019/7/10
+ * @Describe
  */
+
 public final class AnimateHelper {
 
     private AnimateHelper() {

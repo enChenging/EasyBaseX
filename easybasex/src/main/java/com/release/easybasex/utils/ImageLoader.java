@@ -5,22 +5,33 @@ import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.release.easybasex.R;
 
 import java.io.File;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by long on 2016/8/23.
- * 图片加载帮助类
- * 不加 dontAnimate()，有的机型会出现图片变形的情况，先记下找到更好的方法再处理
+ * @author Mr.release
+ * @create 2019/7/10
+ * @Describe
  */
+
 public final class ImageLoader {
 
 
     private ImageLoader() {
         throw new RuntimeException("ImageLoader cannot be initialized!");
+    }
+
+    public static void load(Context context, String url, ImageView view) {
+        Glide.with(context).clear(view);
+        RequestOptions options = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.DATA).placeholder(R.drawable.bg_placeholder);
+        Glide.with(context).load(url).transition(new DrawableTransitionOptions().crossFade()).apply(options).into(view);
     }
 
     public static void load(Context context, String url, ImageView view, int defaultResId) {

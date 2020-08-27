@@ -16,12 +16,15 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.File;
 import java.io.IOException;
@@ -90,6 +93,7 @@ public class CommonUtil {
     /**
      * 获取手机SD卡总空间
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private static long getSDcardTotalSize() {
         if (checkSdCard()) {
             File path = Environment.getExternalStorageDirectory();
@@ -106,6 +110,7 @@ public class CommonUtil {
     /**
      * 获取SDka可用空间
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private static long getSDcardAvailableSize() {
         if (checkSdCard()) {
             File path = Environment.getExternalStorageDirectory();
@@ -122,6 +127,7 @@ public class CommonUtil {
     /**
      * 获取手机内部存储总空间
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static long getPhoneTotalSize() {
         if (!checkSdCard()) {
             File path = Environment.getDataDirectory();
@@ -138,6 +144,7 @@ public class CommonUtil {
     /**
      * 获取手机内存存储可用空间
      */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static long getPhoneAvailableSize() {
         if (!checkSdCard()) {
             File path = Environment.getDataDirectory();
