@@ -1,14 +1,21 @@
 package com.release.easybasex.base;
 
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.just.agentweb.AgentWeb;
+import com.just.agentweb.DefaultWebClient;
 import com.just.agentweb.WebChromeClient;
+import com.just.agentweb.WebViewClient;
 import com.release.easybasex.R;
+import com.release.easybasex.widget.CoolIndicatorLayout;
+import com.release.easybasex.widget.WebLayout;
 
 /**
  * @author Mr.release
@@ -31,14 +38,19 @@ public abstract class BaseWebView extends BaseActivity {
     public void initView() {
         mContainer = (LinearLayout) findViewById(R.id.container);
 
-        if (!StringUtils.isEmpty(getUrl())) {
-            mUrl = getUrl();
+        if (!StringUtils.isEmpty(getWebUrl())) {
+            mUrl = getWebUrl();
         } else {
             ToastUtils.showShort("未获取到url地址");
             finish();
         }
 
-        mTopBar.setTitle(getActivityTitle());
+        mTopBar.setTitle(getString(R.string.loading)).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mTopBar.setTitle(getWebTitle()).setTitleSelected(true);
+            }
+        }, 2000);
 
         mTopBar.setOnBackhtClickListener(v -> {
             // true表示AgentWeb处理了该事件
@@ -53,21 +65,41 @@ public abstract class BaseWebView extends BaseActivity {
 
     private void initWebView() {
         mAgentWeb = AgentWeb.with(this)
-                //传入AgentWeb 的父控件 ，如果父控件为 RelativeLayout ， 那么第二参数需要传入 RelativeLayout.LayoutParams ,第一个参数和第二个参数应该对应。
                 .setAgentWebParent(mContainer, new LinearLayout.LayoutParams(-1, -1))
-                .useDefaultIndicator()// 使用默认进度条
-                .setWebChromeClient(new WebChromeClient() {
-                    @Override
-                    public void onReceivedTitle(WebView view, String title) {
-                        super.onReceivedTitle(view, title);
-                        mTopBar.setTitle(title);
-                    }
-                })
-                //.defaultProgressBarColor() // 使用默认进度条颜色
+                .setCustomIndicator(new CoolIndicatorLayout(this))
+                .setWebChromeClient(mWebChromeClient)
+                .setWebViewClient(mWebViewClient)
+                .setMainFrameErrorView(R.layout.agentweb_error_page, -1)
+                .setSecurityType(AgentWeb.SecurityType.STRICT_CHECK)
+                .setWebLayout(new WebLayout(this))
+                .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.ASK)//打开其他应用时，弹窗咨询用户是否前往其他应用
+                .interceptUnkownUrl() //拦截找不到相关页面的Scheme
                 .createAgentWeb()
                 .ready()
                 .go(mUrl);
     }
+
+    private com.just.agentweb.WebViewClient mWebViewClient = new WebViewClient() {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            return super.shouldOverrideUrlLoading(view, request);
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            //do you  work
+            Log.i("Info", "BaseWebActivity onPageStarted");
+        }
+    };
+    private WebChromeClient mWebChromeClient = new WebChromeClient() {
+
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            super.onReceivedTitle(view, title);
+            mTopBar.setTitle(title);
+        }
+    };
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -108,14 +140,15 @@ public abstract class BaseWebView extends BaseActivity {
      *
      * @return
      */
-    public abstract String getUrl();
+    public abstract String getWebUrl();
 
     /**
      * 设置标题
      *
      * @return
      */
-    public String getActivityTitle() {
+    public String getWebTitle() {
         return "";
     }
+
 }
