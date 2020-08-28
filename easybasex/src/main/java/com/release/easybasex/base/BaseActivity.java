@@ -34,25 +34,19 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.Utils;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 
 /**
  * @author Mr.release
  * @create 2019/3/22
  * @Describe
  */
-public abstract class BaseActivity extends AppCompatActivity implements
-        SwipeBackActivityBase, UiInterfaceAct {
+public abstract class BaseActivity extends AppCompatActivity implements UiInterfaceAct {
 
     protected static String TAG;
     protected NetworkChangeReceiver mNetworkChangeReceiver;
     protected LinearLayoutCompat mBaseView;
     protected EmptyLayout mEmptyLayout;
     protected IToolBar mTopBar;
-    private SwipeBackActivityHelper mHelper;
     private TipLoadDialog mTipLoadDialog;
 
     public boolean useEventBus() {
@@ -67,10 +61,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
         TAG = this.getClass().getSimpleName();
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        mHelper = new SwipeBackActivityHelper(this);
-
-        mHelper.onActivityCreate();
 
         initContentView(getLayoutId());
 
@@ -225,23 +215,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
     @Override
     public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onPostCreate(savedInstanceState, persistentState);
-    }
-
-    @Override
-    public SwipeBackLayout getSwipeBackLayout() {
-        return mHelper.getSwipeBackLayout();
-    }
-
-    @Override
-    public void setSwipeBackEnable(boolean enable) {
-        getSwipeBackLayout().setEnableGesture(enable);
-    }
-
-
-    @Override
-    public void scrollToFinishActivity() {
-        Utils.convertActivityToTranslucent(this);
-        getSwipeBackLayout().scrollToFinishActivity();
     }
 
     public void showLoading() {

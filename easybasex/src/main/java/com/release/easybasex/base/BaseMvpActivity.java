@@ -2,10 +2,6 @@ package com.release.easybasex.base;
 
 import android.os.Bundle;
 
-import com.release.easybasex.R;
-import com.release.easybasex.utils.ToastUtils;
-import com.release.easybasex.widget.EmptyLayout;
-
 
 /**
  * @author Mr.release
@@ -15,6 +11,7 @@ import com.release.easybasex.widget.EmptyLayout;
 public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> extends BaseActivity implements IView {
 
     protected P mPresenter;
+
     protected abstract P createPresenter();
 
     @Override
@@ -31,22 +28,22 @@ public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> 
 
     @Override
     public void showLoading() {
-       super.showLoading();
+        super.showLoading();
     }
 
     @Override
     public void hideLoading() {
-       super.hideLoading();
+        super.hideLoading();
     }
 
     @Override
     public void showError() {
-       super.showError();
+        super.showError();
     }
 
     @Override
     public void showError(String msg) {
-       super.showError();
+        super.showError();
     }
 
     @Override
