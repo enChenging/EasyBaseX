@@ -11,12 +11,12 @@ import com.release.easybasex.base.BaseWebView;
 public class WebViewPlusActivity extends BaseWebView {
 
     @Override
-    public String getUrl() {
-        return "https://www.baidu.com";
+    public String getWebTitle() {
+        return "WebViewPlus";
     }
 
     @Override
-    public String getActivityTitle() {
-        return "WebViewPlus";
+    public String getWebUrl() {
+        return "https://www.baidu.com";
     }
 }
