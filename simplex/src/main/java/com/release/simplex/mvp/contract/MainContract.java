@@ -14,7 +14,7 @@ import com.release.simplex.MainActivity;
 public interface MainContract {
 
     interface View extends IView {
-        void loadData(Object data);
+        void loadData(Object data,boolean isRefresh);
     }
 
     interface Presenter extends IPresenter<View> {

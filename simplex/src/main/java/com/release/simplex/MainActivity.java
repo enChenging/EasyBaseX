@@ -23,8 +23,7 @@ import com.release.simplex.ui.adapter.DataAdapter;
 import com.release.simplex.utils.MenuUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,6 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout mRefreshLayout;
     private DataAdapter mAdapter;
-    private boolean isRefresh = true;
 
     @Override
     public int getLayoutId() {
@@ -78,34 +76,29 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
 
     @Override
     public void initListener() {
-        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                isRefresh = true;
-                mAdapter.setFooterWithEmptyEnable(false);
-                mPresenter.requestData(isRefresh);
-                mRefreshLayout.finishRefresh(1000);
-            }
-        });
-
-        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                mRefreshLayout.finishLoadMore(1000);
-                isRefresh = false;
+                refreshLayout.finishLoadMore(1000);
                 int page = mAdapter.getData().size() / PAGE;
-                mPresenter.requestData(isRefresh);
+                mPresenter.requestData(false);
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                refreshLayout.finishRefresh(1000);
+                mPresenter.requestData(true);
             }
         });
     }
 
     @Override
     public void startNet() {
-        mPresenter.requestData(isRefresh);
+        mPresenter.requestData(false);
     }
 
     @Override
-    public void loadData(Object data) {
+    public void loadData(Object data, boolean isRefresh) {
         mAdapter.setList(getEntity());
     }
 
