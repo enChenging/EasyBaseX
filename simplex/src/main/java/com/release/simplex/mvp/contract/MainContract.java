@@ -14,11 +14,11 @@ import com.release.simplex.MainActivity;
 public interface MainContract {
 
     interface View extends IView {
+        void loadData(Object data);
     }
 
     interface Presenter extends IPresenter<View> {
         void requestData(boolean isRefresh);
-
         void exit(MainActivity context);
     }
 }

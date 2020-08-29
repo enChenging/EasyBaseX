@@ -6,11 +6,6 @@ package com.release.easybasex.base;
  * @Describe
  */
 public interface IView {
-
-    /**
-     * 加载数据
-     */
-    void loadData(Object data);
     /**
      * 显示加载
      */

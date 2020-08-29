@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
  * @create 2019/3/22
  * @Describe
  */
-public abstract class QMUIBaseActivity<T extends Presenter> extends QMUIActivity implements
+public abstract class QMUIBaseActivity extends QMUIActivity implements
         UiInterfaceAct {
 
     protected static String TAG;

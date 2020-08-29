@@ -91,10 +91,10 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                mRefreshLayout.finishLoadMore(1000);
                 isRefresh = false;
                 int page = mAdapter.getData().size() / PAGE;
                 mPresenter.requestData(isRefresh);
-                mRefreshLayout.finishLoadMore(1000);
             }
         });
     }
@@ -106,7 +106,6 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
 
     @Override
     public void loadData(Object data) {
-        super.loadData(data);
         mAdapter.setList(getEntity());
     }
 

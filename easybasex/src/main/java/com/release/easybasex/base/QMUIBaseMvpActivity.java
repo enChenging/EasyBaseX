@@ -70,9 +70,4 @@ public abstract class QMUIBaseMvpActivity<V extends IView, P extends IPresenter<
         mPresenter.detachView();
         mPresenter = null;
     }
-
-    @Override
-    public void loadData(Object data) {
-
-    }
 }
