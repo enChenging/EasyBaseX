@@ -104,6 +104,6 @@ configurations.all {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 //    implementation project(':easybasex')
-    implementation 'com.github.enChenging:EasyBaseX:1.1.7'
+    implementation 'com.github.enChenging:EasyBaseX:1.1.8'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 }
