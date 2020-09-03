@@ -15,14 +15,9 @@ public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> 
     protected abstract P createPresenter();
 
     @Override
-    public void initView() {
+    protected void onCreate(Bundle savedInstanceState) {
         mPresenter = createPresenter();
         mPresenter.attachView((V) this);
-        super.initView();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 

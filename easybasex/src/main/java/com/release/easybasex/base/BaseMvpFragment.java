@@ -20,14 +20,9 @@ public abstract class BaseMvpFragment<V extends IView, P extends IPresenter<V>> 
     protected abstract P createPresenter();
 
     @Override
-    public void initView(View view) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mPresenter = createPresenter();
         mPresenter.attachView((V) this);
-        super.initView(view);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
 

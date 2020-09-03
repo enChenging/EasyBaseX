@@ -45,15 +45,19 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
         mContext = getActivity();
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View baseViewGroup =  LayoutInflater.from(mContext).inflate(R.layout.cyc_fragment_base, null);
-        mBaseViewFragment = baseViewGroup.findViewById(R.id.ll_fragment_base_view);
-        LayoutInflater.from(mContext).inflate(getLayoutId(), mBaseViewFragment, true);
-        return baseViewGroup;
+        View _view;
+        if (isOriginalLayout()){
+            _view =  LayoutInflater.from(mContext).inflate(R.layout.cyc_fragment_base, null);
+            mBaseViewFragment = _view.findViewById(R.id.ll_fragment_base_view);
+            LayoutInflater.from(mContext).inflate(getLayoutId(), mBaseViewFragment, true);
+        }else{
+            _view = inflater.inflate(getLayoutId(), container, false);
+        }
+        return _view;
     }
 
     @Override
@@ -94,6 +98,10 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
         }
     }
 
+    @Override
+    public boolean isOriginalLayout() {
+        return false;
+    }
 
     @Override
     public void initView(View view) {

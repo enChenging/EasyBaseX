@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-
 import com.release.easybasex.R;
 
 import java.lang.reflect.Field;
@@ -35,9 +34,6 @@ public class StatusBarUtil {
     private static final int FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view;
     private static final int FAKE_TRANSLUCENT_VIEW_ID = R.id.statusbarutil_translucent_view;
     private static final int TAG_KEY_HAVE_SET_OFFSET = -123;
-    public final static int TYPE_MIUI = 0;
-    public final static int TYPE_FLYME = 1;
-    public final static int TYPE_M = 3;//6.0
 
     /**
      * 设置状态栏颜色
@@ -57,7 +53,7 @@ public class StatusBarUtil {
      * @param statusBarAlpha 状态栏透明度
      */
 
-    private static void setColor(Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int statusBarAlpha) {
+    public static void setColor(Activity activity, @ColorInt int color, @IntRange(from = 0, to = 255) int statusBarAlpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -95,7 +91,7 @@ public class StatusBarUtil {
      * @param color          状态栏颜色值
      * @param statusBarAlpha 状态栏透明度
      */
-    private static void setColorForSwipeBack(Activity activity, @ColorInt int color,
+    public static void setColorForSwipeBack(Activity activity, @ColorInt int color,
                                             @IntRange(from = 0, to = 255) int statusBarAlpha) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
@@ -139,80 +135,6 @@ public class StatusBarUtil {
     }
 
     /**
-     * 使状态栏半透明
-     * <p>
-     * 适用于图片作为背景的界面,此时需要图片填充到状态栏
-     *
-     * @param activity 需要设置的activity
-     */
-    public static void setTranslucent(Activity activity) {
-        setTranslucent(activity, DEFAULT_STATUS_BAR_ALPHA);
-    }
-
-    /**
-     * 设置状态栏透明
-     * <p>
-     * 适用于图片作为背景的界面,此时需要图片填充到状态栏
-     *
-     * @param activity       需要设置的activity
-     * @param statusBarAlpha 状态栏透明度
-     */
-    public static void setTranslucent(Activity activity, @IntRange(from = 0, to = 255) int statusBarAlpha) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
-        setTransparent(activity);
-        addTranslucentView(activity, statusBarAlpha);
-    }
-
-    /**
-     * 使状态栏半透明
-     *
-     * @param activity 需要设置的activity
-     */
-    public static void setTransparent(Activity activity) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
-        transparentStatusBar(activity);
-        setRootView(activity);
-    }
-
-    /**
-     * 针对根布局是 CoordinatorLayout, 使状态栏半透明
-     * <p>
-     * 适用于图片作为背景的界面,此时需要图片填充到状态栏
-     *
-     * @param activity       需要设置的activity
-     * @param statusBarAlpha 状态栏透明度
-     */
-    public static void setTranslucentForCoordinatorLayout(Activity activity, @IntRange(from = 0, to = 255) int statusBarAlpha) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
-        transparentStatusBar(activity);
-        addTranslucentView(activity, statusBarAlpha);
-    }
-
-
-    /**
-     * 使状态栏透明(5.0以上半透明效果,不建议使用)
-     * <p>
-     * 适用于图片作为背景的界面,此时需要图片填充到状态栏
-     *
-     * @param activity 需要设置的activity
-     */
-    @Deprecated
-    public static void setTranslucentDiff(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            // 设置状态栏透明
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            setRootView(activity);
-        }
-    }
-
-
-    /**
      * 设置状态栏颜色(5.0以下无半透明效果,不建议使用)
      *
      * @param activity 需要设置的 activity
@@ -238,7 +160,77 @@ public class StatusBarUtil {
         setRootView(activity);
     }
 
-    //············································································································································
+    /**
+     * 使状态栏半透明
+     * <p>
+     * 适用于图片作为背景的界面,此时需要图片填充到状态栏
+     *
+     * @param activity 需要设置的activity
+     */
+    public static void setTranslucent(Activity activity) {
+        setTranslucent(activity, DEFAULT_STATUS_BAR_ALPHA);
+    }
+
+    /**
+     * 使状态栏半透明
+     * <p>
+     * 适用于图片作为背景的界面,此时需要图片填充到状态栏
+     *
+     * @param activity       需要设置的activity
+     * @param statusBarAlpha 状态栏透明度
+     */
+    public static void setTranslucent(Activity activity, @IntRange(from = 0, to = 255) int statusBarAlpha) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            return;
+        }
+        setTransparent(activity);
+        addTranslucentView(activity, statusBarAlpha);
+    }
+
+    /**
+     * 针对根布局是 CoordinatorLayout, 使状态栏半透明
+     * <p>
+     * 适用于图片作为背景的界面,此时需要图片填充到状态栏
+     *
+     * @param activity       需要设置的activity
+     * @param statusBarAlpha 状态栏透明度
+     */
+    public static void setTranslucentForCoordinatorLayout(Activity activity, @IntRange(from = 0, to = 255) int statusBarAlpha) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            return;
+        }
+        transparentStatusBar(activity);
+        addTranslucentView(activity, statusBarAlpha);
+    }
+
+    /**
+     * 设置状态栏全透明
+     *
+     * @param activity 需要设置的activity
+     */
+    public static void setTransparent(Activity activity) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            return;
+        }
+        transparentStatusBar(activity);
+        setRootView(activity);
+    }
+
+    /**
+     * 使状态栏透明(5.0以上半透明效果,不建议使用)
+     * <p>
+     * 适用于图片作为背景的界面,此时需要图片填充到状态栏
+     *
+     * @param activity 需要设置的activity
+     */
+    @Deprecated
+    public static void setTranslucentDiff(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // 设置状态栏透明
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            setRootView(activity);
+        }
+    }
 
     /**
      * 为DrawerLayout 布局设置状态栏变色

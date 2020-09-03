@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.orhanobut.logger.Logger;
 import com.release.easybasex.R;
 import com.release.easybasex.constance.BConstants;
 import com.release.easybasex.event.NetworkChangeEvent;
@@ -83,6 +84,11 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
 
 
     @Override
+    public boolean isOriginalLayout() {
+        return false;
+    }
+
+    @Override
     public void initView() {
 
     }
@@ -102,10 +108,14 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
 
 
     private void initContentView(int layoutId) {
-        View baseViewGroup = this.getLayoutInflater().inflate(R.layout.cyc_activity_base, null);
-        mBaseView = baseViewGroup.findViewById(R.id.llc_base_view);
-        LayoutInflater.from(this).inflate(layoutId, mBaseView, true);
-        setContentView(baseViewGroup);
+        if (isOriginalLayout()){
+            setContentView(layoutId);
+        }else {
+            View baseViewGroup = this.getLayoutInflater().inflate(R.layout.cyc_activity_base, null);
+            mBaseView = baseViewGroup.findViewById(R.id.llc_base_view);
+            LayoutInflater.from(this).inflate(layoutId, mBaseView, true);
+            setContentView(baseViewGroup);
+        }
     }
 
     @Override
@@ -132,6 +142,7 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
     }
 
     protected void initThemeColor() {
+        Logger.i("initThemeColor");
         StatusBarUtil.setColorNoTranslucent(this, getResources().getColor(R.color.theme_color));
         //ActionBar颜色
         if (this.getSupportActionBar() != null) {

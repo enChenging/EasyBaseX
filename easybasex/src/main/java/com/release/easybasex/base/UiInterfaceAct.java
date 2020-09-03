@@ -9,6 +9,8 @@ interface UiInterfaceAct {
 
     int getLayoutId();
 
+    boolean isOriginalLayout();
+
     void initView();
 
     void initListener();

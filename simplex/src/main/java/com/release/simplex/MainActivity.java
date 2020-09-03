@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.entity.node.BaseNode;
+import com.orhanobut.logger.Logger;
 import com.release.cameralibrary.PermissionUtils;
 import com.release.easybasex.base.BaseMvpActivity;
+import com.release.easybasex.utils.StatusBarUtil;
 import com.release.simplex.mvp.contract.MainContract;
 import com.release.simplex.mvp.model.FirstNode;
 import com.release.simplex.mvp.model.MenuBean;
@@ -56,9 +58,18 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
         return new MainPersenter();
     }
 
+//    @Override
+//    public boolean isOriginalLayout() {
+//        return true;
+//    }
+
+//    @Override
+//    protected void initThemeColor() {
+//        StatusBarUtil.setTransparent(this);
+//    }
+
     @Override
     public void initView() {
-        super.initView();
         mTopBar.setTitle("主页").setBackIconVisible(View.GONE);
         mRvList.setHasFixedSize(true);
         mRvList.setLayoutManager(new LinearLayoutManager(this));

@@ -11,6 +11,8 @@ interface UiInterfaceFrag {
 
     int getLayoutId();
 
+    boolean isOriginalLayout();
+
     void initView(View view);
 
     void initListener();
