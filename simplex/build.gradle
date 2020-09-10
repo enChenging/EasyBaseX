@@ -4,8 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-
-
     buildToolsVersion "29.0.2"
 
     defaultConfig {
@@ -25,12 +23,6 @@ android {
     }
 
     signingConfigs {
-        debug {
-            keyAlias 'android'
-            keyPassword 'android'
-            storeFile file('simplex.jks')
-            storePassword 'android'
-        }
         release {
             keyAlias 'android'
             keyPassword 'android'
