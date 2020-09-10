@@ -78,6 +78,7 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
         mRvList.setAdapter(mAdapter);
 
         PermissionUtils.checkAndReqkPermission(this, needPermissions);
+
     }
 
     public String[] needPermissions = {

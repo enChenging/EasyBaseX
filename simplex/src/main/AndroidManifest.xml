@@ -30,23 +30,31 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".downLoad.DownLoadActivity"
+        <activity
+            android:name=".ui.act.DownLoadActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".ui.act.ScreenshotAndWindowFloatActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".ui.act.WebViewPlusActivity"
-            android:launchMode="singleTop"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.act.VLayoutActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".ui.act.TimerAnimationActivity"
+        <activity
+            android:name=".ui.act.TimerAnimationActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".ui.act.ImageViewScaleTypeActivity"
-            android:launchMode="singleTop"
-            />
+        <activity
+            android:name=".ui.act.ImageViewScaleTypeActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.act.ThreadActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.act.ThreadOtherActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

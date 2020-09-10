@@ -1,4 +1,4 @@
-package com.release.simplex.downLoad;
+package com.release.simplex.ui.act;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -15,6 +15,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.release.simplex.R;
+import com.release.simplex.downLoad.DownloadListner;
+import com.release.simplex.downLoad.DownloadManager;
 
 /**
  * @author Mr.release
