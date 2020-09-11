@@ -74,7 +74,7 @@ dependencies {
     api 'com.umeng.sdk:common:1.5.3'
     api 'com.umeng.analytics:analytics:6.1.4'
     api 'com.github.enChenging:cameraAndPhotos:1.2.6'
-    api 'com.github.enChenging:Alert:1.0.3'
+    api 'com.github.enChenging:Alert:1.0.4'
     api 'com.github.enChenging:IToolBar:1.0.4'
     api 'com.blankj:utilcodex:1.26.0'
     api 'com.qmuiteam:qmui:2.0.0-alpha08'
