@@ -55,6 +55,9 @@
         <activity
             android:name=".ui.act.ThreadOtherActivity"
             android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.act.IjkPlayerActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

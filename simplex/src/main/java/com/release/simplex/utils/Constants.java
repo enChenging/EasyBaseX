@@ -14,11 +14,16 @@ import java.io.File;
 
 public interface Constants {
 
+    /**
+     * ------------直播----------------
+     */
+    int NO_FULL_SCREEN_PLAY = 0;
+    int FULL_SCREEN_PLAY = 1;
+
     int PAGE = 20;
     int PAGE_TEN = 10;
 
     String TEMP_IMAGE = "https://cms-bucket.ws.126.net/2020/0604/2d48661bp00qbdjof0031c0009c005uc.png";
     String FILE_PATH = Environment.getExternalStorageDirectory() + File.separator + App.getInstance().getPackageName() + File.separator + "images";
-
 
 }

@@ -44,6 +44,12 @@ android {
         }
     }
 
+
+    sourceSets.main {
+        jniLibs.srcDir 'src/main/jniLibs'
+    }
+
+
     lintOptions {
         checkReleaseBuilds false
         abortOnError false //不在error情况下中断
@@ -98,4 +104,6 @@ dependencies {
     implementation project(':easybasex')
 //    implementation 'com.github.enChenging:EasyBaseX:latest.release'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
 }

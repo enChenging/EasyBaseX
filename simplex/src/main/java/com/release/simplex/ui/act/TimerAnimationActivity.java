@@ -17,7 +17,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by corleone on 2018/1/18.
+ * @author Mr.release
+ * @create 2020/9/10
+ * @Describe
  */
 
 public class TimerAnimationActivity extends BaseActivity {

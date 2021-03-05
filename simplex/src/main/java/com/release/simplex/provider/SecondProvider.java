@@ -13,6 +13,7 @@ import com.release.easybasex.utils.DensityUtil;
 import com.release.simplex.R;
 import com.release.simplex.ui.act.DownLoadActivity;
 import com.release.simplex.mvp.model.SecondNode;
+import com.release.simplex.ui.act.IjkPlayerActivity;
 import com.release.simplex.ui.act.ImageViewScaleTypeActivity;
 import com.release.simplex.ui.act.ScreenshotAndWindowFloatActivity;
 import com.release.simplex.ui.act.ThreadActivity;
@@ -88,6 +89,9 @@ public class SecondProvider extends BaseNodeProvider {
                     break;
                 case "单线程复用":
                     context.startActivity(new Intent(context, ThreadActivity.class));
+                    break;
+                case "ijk内核播放器":
+                    context.startActivity(new Intent(context, IjkPlayerActivity.class));
                     break;
                 case "ImageView的ScaleType":
                     context.startActivity(new Intent(context, ImageViewScaleTypeActivity.class));

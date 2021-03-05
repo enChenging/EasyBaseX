@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/buffering_indicator"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+
+    <com.release.simplex.ui.corleone_player.CircleProgressView
+        android:id="@+id/video_loading_progress"
+        android:layout_width="@dimen/circle_progress_view_small_size"
+        android:layout_height="@dimen/circle_progress_view_small_size"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        app:matProg_barColor="?attr/colorPrimary"
+        app:matProg_barWidth="@dimen/circle_progress_view_default_border_width"
+        app:matProg_progressIndeterminate="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/video_loading_progress"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="@dimen/default_general_margin"
+        android:text="@string/video_loading"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_medium_text_size" />
+
+
+</RelativeLayout>
