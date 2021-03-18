@@ -4,51 +4,61 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import androidx.annotation.IntDef;
-
 import com.github.ybq.android.spinkit.SpinKitView;
-import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.SpriteFactory;
+import com.github.ybq.android.spinkit.Style;
 import com.release.easybasex.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
+import androidx.core.content.ContextCompat;
 
 /**
  * @author Mr.release
  * @create 2019/3/22
  * @Describe
  */
-public class EmptyLayout extends FrameLayout {
+public class StateLayout extends FrameLayout {
 
     public static final int STATUS_HIDE = 1001;
     public static final int STATUS_SHOW = 1002;
     public static final int STATUS_LOADING = 1;
-    public static final int STATUS_NO_NET = 2;
+    public static final int STATUS_ERROR = 2;
     public static final int STATUS_NO_DATA = 3;
     private Context mContext;
     private OnRetryListener mOnRetryListener;
-    private int mEmptyStatus = STATUS_LOADING;
+    private int mEmptyStatus = 0;
     private int mBgColor;
+    private static int mLoadingThemeColor;
+    private static Style mStyle;
+    private String msg;
 
     TextView mTvEmptyMessage;
     View mRlEmptyContainer;
     SpinKitView mEmptyLoading;
     FrameLayout mEmptyLayout;
 
-    public EmptyLayout(Context context) {
+    public StateLayout(Context context) {
         this(context, null);
     }
 
-    public EmptyLayout(Context context, AttributeSet attrs) {
+    public StateLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
         init(attrs);
+    }
+
+    public static void initLoadingStyle(int loadingThemeColor, Style style) {
+        mLoadingThemeColor = loadingThemeColor;
+        mStyle = style;
     }
 
     /**
@@ -61,13 +71,11 @@ public class EmptyLayout extends FrameLayout {
         } finally {
             a.recycle();
         }
-        View.inflate(mContext, R.layout.cyc_layout_empty_loading, this);
-
-        mTvEmptyMessage = findViewById(R.id.tv_net_error);
-        mRlEmptyContainer = findViewById(R.id.rl_empty_container);
-        mEmptyLoading = findViewById(R.id.empty_loading);
+        View.inflate(mContext, R.layout.cyc_layout_state_view, this);
         mEmptyLayout = findViewById(R.id.fl_empty_layout);
-
+        mRlEmptyContainer = findViewById(R.id.rl_empty_container);
+        mTvEmptyMessage = findViewById(R.id.tv_no_data);
+        mEmptyLoading = findViewById(R.id.empty_loading);
         mEmptyLayout.setBackgroundColor(mBgColor);
         _switchEmptyView();
 
@@ -76,6 +84,13 @@ public class EmptyLayout extends FrameLayout {
                 mOnRetryListener.onRetry();
             }
         });
+
+        if (mLoadingThemeColor != 0) {
+            mEmptyLoading.setColor(ContextCompat.getColor(mContext, mLoadingThemeColor));
+        }
+        if (mStyle != null) {
+            mEmptyLoading.setIndeterminateDrawable(SpriteFactory.create(mStyle));
+        }
     }
 
     /**
@@ -118,43 +133,23 @@ public class EmptyLayout extends FrameLayout {
      *
      * @param msg 显示消息
      */
-    public void setEmptyMessage(String msg) {
+    public void setStateMessage(String msg) {
+        this.msg = msg;
         mTvEmptyMessage.setText(msg);
     }
 
+
     /**
      * 设置图片
+     *
      * @param drawable
      */
-    public void setErrorIcon(Drawable drawable) {
+    public void setStateIcon(Drawable drawable) {
         drawable.setBounds(0, 0, drawable.getMinimumWidth(),
                 drawable.getMinimumHeight());
         mTvEmptyMessage.setCompoundDrawables(null, drawable, null, null);
     }
 
-    public void hideErrorIcon() {
-        mTvEmptyMessage.setCompoundDrawables(null, null, null, null);
-    }
-
-//    /**
-//     * 设置图标
-//     * @param resId 资源ID
-//     */
-//    public void setEmptyIcon(int resId) {
-//        mIvEmptyIcon.setImageResource(resId);
-//    }
-//
-//    /**
-//     * 设置图标
-//     * @param drawable drawable
-//     */
-//    public void setEmptyIcon(Drawable drawable) {
-//        mIvEmptyIcon.setImageDrawable(drawable);
-//    }
-
-    public void setLoadingIcon(Sprite d) {
-        mEmptyLoading.setIndeterminateDrawable(d);
-    }
 
     /**
      * 切换视图
@@ -167,7 +162,15 @@ public class EmptyLayout extends FrameLayout {
                 mEmptyLoading.setVisibility(VISIBLE);
                 break;
             case STATUS_NO_DATA:
-            case STATUS_NO_NET:
+                setStateMessage(mContext.getResources().getString(R.string.no_data));
+                setStateIcon(mContext.getResources().getDrawable(R.mipmap.ic_empty));
+                setVisibility(VISIBLE);
+                mEmptyLoading.setVisibility(GONE);
+                mRlEmptyContainer.setVisibility(VISIBLE);
+                break;
+            case STATUS_ERROR:
+                setStateMessage(mContext.getResources().getString(R.string.data_error));
+                setStateIcon(mContext.getResources().getDrawable(R.mipmap.ic_error));
                 setVisibility(VISIBLE);
                 mEmptyLoading.setVisibility(GONE);
                 mRlEmptyContainer.setVisibility(VISIBLE);
@@ -199,7 +202,7 @@ public class EmptyLayout extends FrameLayout {
 
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({STATUS_LOADING, STATUS_NO_NET, STATUS_NO_DATA})
+    @IntDef({STATUS_LOADING, STATUS_ERROR, STATUS_NO_DATA})
     public @interface EmptyStatus {
     }
 }

@@ -32,8 +32,8 @@ public abstract class BaseMvpFragment<V extends IView, P extends IPresenter<V>> 
     }
 
     @Override
-    public void hideLoading() {
-        super.hideLoading();
+    public void hide() {
+        super.hide();
     }
 
     @Override
@@ -43,7 +43,7 @@ public abstract class BaseMvpFragment<V extends IView, P extends IPresenter<V>> 
 
     @Override
     public void showError(String msg) {
-        ToastUtils.show(msg);
+       super.showError(msg);
     }
 
     @Override

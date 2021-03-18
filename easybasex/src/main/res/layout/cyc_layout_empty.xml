@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@mipmap/ic_data_empty" />
+            android:src="@mipmap/ic_empty_data" />
 
 
     </LinearLayout>

@@ -11,7 +11,8 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 
 import com.release.easybasex.R;
-import com.release.easybasex.widget.EmptyLayout;
+import com.release.easybasex.utils.ToastUtils;
+import com.release.easybasex.widget.StateLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -37,7 +38,7 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
     private Unbinder mUnbinder;
     protected Context mContext;
     protected LinearLayoutCompat mBaseViewFragment;
-    protected EmptyLayout mEmptyLayoutFragment;
+    protected StateLayout mStateLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         isViewPrepare = true;
-        mEmptyLayoutFragment = view.findViewById(R.id.empty_layout);
+        mStateLayout = view.findViewById(R.id.state_layout);
         if (useEventBus()) {
             EventBus.getDefault().register(this);
         }
@@ -131,28 +132,39 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
     }
 
     public void showLoading() {
-        if (mEmptyLayoutFragment != null) {
-            mEmptyLayoutFragment.show();
-            mEmptyLayoutFragment.setEmptyStatus(EmptyLayout.STATUS_LOADING);
+        if (mStateLayout != null) {
+            mStateLayout.setEmptyStatus(StateLayout.STATUS_LOADING);
+            mStateLayout.show();
         }
     }
 
-    public void hideLoading() {
-        if (mEmptyLayoutFragment != null) {
-            mEmptyLayoutFragment.hide();
+    public void hide() {
+        if (mStateLayout != null) {
+            mStateLayout.hide();
+        }
+    }
+
+    public void showNoData() {
+        if (mStateLayout != null) {
+            mStateLayout.setEmptyStatus(StateLayout.STATUS_NO_DATA);
+            mStateLayout.show();
         }
     }
 
     public void showError() {
-        if (mEmptyLayoutFragment != null) {
-            mEmptyLayoutFragment.show();
-            mEmptyLayoutFragment.setEmptyStatus(EmptyLayout.STATUS_NO_DATA);
-            mEmptyLayoutFragment.setRetryListener(new EmptyLayout.OnRetryListener() {
+        if (mStateLayout != null) {
+            mStateLayout.setEmptyStatus(StateLayout.STATUS_ERROR);
+            mStateLayout.show();
+            mStateLayout.setRetryListener(new StateLayout.OnRetryListener() {
                 @Override
                 public void onRetry() {
                     startNet();
                 }
             });
         }
+    }
+
+    public void showError(String msg) {
+        ToastUtils.show(msg);
     }
 }

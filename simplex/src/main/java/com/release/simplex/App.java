@@ -2,7 +2,9 @@ package com.release.simplex;
 
 import android.content.Context;
 
+import com.github.ybq.android.spinkit.Style;
 import com.release.easybasex.base.BaseApplication;
+import com.release.easybasex.widget.StateLayout;
 import com.release.itoolbar.IToolBar;
 import com.scwang.smartrefresh.header.TaurusHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -39,7 +41,7 @@ public class App extends BaseApplication {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-                layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white);//全局设置主题颜色
+                layout.setPrimaryColorsId(R.color.theme_color, android.R.color.white);//全局设置主题颜色
                 //指定为经典Header，默认是 贝塞尔雷达Header
                 return new TaurusHeader(context);
             }
@@ -48,7 +50,7 @@ public class App extends BaseApplication {
         SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
             @Override
             public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
-                layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white);
+                layout.setPrimaryColorsId(R.color.theme_color, android.R.color.white);
                 //指定为经典Footer，默认是 BallPulseFooter
                 //new ClassicsFooter(context).setDrawableSize(20);
                 return new BallPulseFooter(context).setSpinnerStyle(SpinnerStyle.Scale);
@@ -61,5 +63,6 @@ public class App extends BaseApplication {
         super.initConfig();
         // QMUISwipeBackActivityManager.init(application);
         IToolBar.init(R.color.theme_color, R.color.white, R.mipmap.toolbar_back_white);
+        StateLayout.initLoadingStyle(R.color.theme_color, Style.MULTIPLE_PULSE);
     }
 }

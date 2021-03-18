@@ -15,6 +15,7 @@ import com.orhanobut.logger.Logger;
 import com.release.cameralibrary.PermissionUtils;
 import com.release.easybasex.base.BaseMvpActivity;
 import com.release.easybasex.utils.StatusBarUtil;
+import com.release.easybasex.widget.dialog.TipLoadDialog;
 import com.release.simplex.mvp.contract.MainContract;
 import com.release.simplex.mvp.model.FirstNode;
 import com.release.simplex.mvp.model.MenuBean;
@@ -79,6 +80,10 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
 
         PermissionUtils.checkAndReqkPermission(this, needPermissions);
 
+//        showLoading();
+//        showError();
+//        showNoData();
+//        showTip(TipLoadDialog.ICON_TYPE_LOADING2,"正在加载...");
     }
 
     public String[] needPermissions = {

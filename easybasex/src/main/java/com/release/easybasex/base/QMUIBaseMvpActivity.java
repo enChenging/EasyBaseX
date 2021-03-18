@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.release.easybasex.R;
 import com.release.easybasex.utils.ToastUtils;
-import com.release.easybasex.widget.EmptyLayout;
+import com.release.easybasex.widget.StateLayout;
 
 
 /**
@@ -15,7 +15,7 @@ import com.release.easybasex.widget.EmptyLayout;
 public abstract class QMUIBaseMvpActivity<V extends IView, P extends IPresenter<V>> extends QMUIBaseActivity implements IView {
 
     protected P mPresenter;
-    protected EmptyLayout mEmptyLayout;
+    protected StateLayout mStateLayout;
 
     protected abstract P createPresenter();
 
@@ -29,28 +29,38 @@ public abstract class QMUIBaseMvpActivity<V extends IView, P extends IPresenter<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mEmptyLayout = findViewById(R.id.empty_layout);
+        mStateLayout = findViewById(R.id.state_layout);
     }
 
     @Override
     public void showLoading() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_LOADING);
+        if (mStateLayout != null) {
+            mStateLayout.setEmptyStatus(StateLayout.STATUS_LOADING);
+            mStateLayout.show();
         }
     }
 
     @Override
-    public void hideLoading() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.hide();
+    public void hide() {
+        if (mStateLayout != null) {
+            mStateLayout.hide();
+        }
+    }
+
+    @Override
+    public void showNoData() {
+        if (mStateLayout != null) {
+            mStateLayout.setEmptyStatus(StateLayout.STATUS_NO_DATA);
+            mStateLayout.show();
         }
     }
 
     @Override
     public void showError() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_NO_NET);
-            mEmptyLayout.setRetryListener(new EmptyLayout.OnRetryListener() {
+        if (mStateLayout != null) {
+            mStateLayout.setEmptyStatus(StateLayout.STATUS_ERROR);
+            mStateLayout.show();
+            mStateLayout.setRetryListener(new StateLayout.OnRetryListener() {
                 @Override
                 public void onRetry() {
                     startNet();

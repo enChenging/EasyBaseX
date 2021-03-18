@@ -11,11 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.orhanobut.logger.Logger;
 import com.release.easybasex.R;
 import com.release.easybasex.constance.BConstants;
@@ -26,7 +21,7 @@ import com.release.easybasex.utils.KeyBoardUtils;
 import com.release.easybasex.utils.SPUtil;
 import com.release.easybasex.utils.StatusBarUtil;
 import com.release.easybasex.utils.ToastUtils;
-import com.release.easybasex.widget.EmptyLayout;
+import com.release.easybasex.widget.StateLayout;
 import com.release.easybasex.widget.dialog.TipLoadDialog;
 import com.release.itoolbar.IToolBar;
 
@@ -34,6 +29,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.ButterKnife;
 
 /**
@@ -46,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
     protected static String TAG;
     protected NetworkChangeReceiver mNetworkChangeReceiver;
     protected LinearLayoutCompat mBaseView;
-    protected EmptyLayout mEmptyLayout;
+    protected StateLayout mStateLayout;
     protected IToolBar mTopBar;
     private TipLoadDialog mTipLoadDialog;
 
@@ -66,7 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
         initContentView(getLayoutId());
 
         mTopBar = findViewById(R.id.itb_base_topbar);
-        mEmptyLayout = findViewById(R.id.empty_layout);
+        mStateLayout = findViewById(R.id.state_layout);
 
         ButterKnife.bind(this);
 
@@ -108,9 +107,9 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
 
 
     private void initContentView(int layoutId) {
-        if (isOriginalLayout()){
+        if (isOriginalLayout()) {
             setContentView(layoutId);
-        }else {
+        } else {
             View baseViewGroup = this.getLayoutInflater().inflate(R.layout.cyc_activity_base, null);
             mBaseView = baseViewGroup.findViewById(R.id.llc_base_view);
             LayoutInflater.from(this).inflate(layoutId, mBaseView, true);
@@ -207,45 +206,42 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
         }
     }
 
-    /**
-     * 关闭加载动画
-     */
-    protected void hideProgress() {
-        hideTip();
-    }
-
-    /**
-     * 关闭QmuiTip
-     */
-    protected void hideTip() {
-        if (mTipLoadDialog.isShowing()) {
-            mTipLoadDialog.dismiss();
-        }
-    }
 
     @Override
     public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onPostCreate(savedInstanceState, persistentState);
     }
 
-    public void showLoading() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.show();
-            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_LOADING);
+    public void hide() {
+        if (mStateLayout != null) {
+            mStateLayout.hide();
+        }
+
+        if (mTipLoadDialog != null && mTipLoadDialog.isShowing()) {
+            mTipLoadDialog.dismiss();
         }
     }
 
-    public void hideLoading() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.hide();
+    public void showNoData() {
+        if (mStateLayout != null) {
+            mStateLayout.show();
+            mStateLayout.setEmptyStatus(StateLayout.STATUS_NO_DATA);
         }
     }
+
+    public void showLoading() {
+        if (mStateLayout != null) {
+            mStateLayout.show();
+            mStateLayout.setEmptyStatus(StateLayout.STATUS_LOADING);
+        }
+    }
+
 
     public void showError() {
-        if (mEmptyLayout != null) {
-            mEmptyLayout.show();
-            mEmptyLayout.setEmptyStatus(EmptyLayout.STATUS_NO_DATA);
-            mEmptyLayout.setRetryListener(new EmptyLayout.OnRetryListener() {
+        if (mStateLayout != null) {
+            mStateLayout.show();
+            mStateLayout.setEmptyStatus(StateLayout.STATUS_ERROR);
+            mStateLayout.setRetryListener(new StateLayout.OnRetryListener() {
                 @Override
                 public void onRetry() {
                     startNet();
@@ -258,13 +254,4 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
         ToastUtils.show(msg);
     }
 
-    protected View getNoDataView(RecyclerView recyclerView) {
-        View noDataStubView = getLayoutInflater().inflate(R.layout.cyc_layout_empty, (ViewGroup) recyclerView.getParent(), false);
-        return noDataStubView;
-    }
-
-    protected View getErrorView(RecyclerView recyclerView) {
-        View sysErrStubView = getLayoutInflater().inflate(R.layout.cyc_layout_error, (ViewGroup) recyclerView.getParent(), false);
-        return sysErrStubView;
-    }
 }

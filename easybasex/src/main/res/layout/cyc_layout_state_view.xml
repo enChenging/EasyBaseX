@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fl_empty_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,7 +13,7 @@
         android:visibility="visible">
 
         <TextView
-            android:id="@+id/tv_net_error"
+            android:id="@+id/tv_no_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -21,11 +22,10 @@
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/no_data"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </FrameLayout>
 
     <com.github.ybq.android.spinkit.SpinKitView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/empty_loading"
         style="@style/SpinKitView.Circle"
         android:layout_width="wrap_content"

@@ -13,7 +13,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_empty_page"
+        android:src="@mipmap/ic_empty_data"
         android:layout_centerInParent="true"
         android:id="@+id/view_empty"
         android:visibility="invisible" />
@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:visibility="visible"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:id="@+id/view_error">
@@ -29,7 +30,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_error_page" />
+            android:src="@mipmap/ic_no_wifi" />
 
         <TextView
             android:padding="5dp"

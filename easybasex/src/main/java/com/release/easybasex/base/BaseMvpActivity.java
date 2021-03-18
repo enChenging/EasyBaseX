@@ -27,8 +27,13 @@ public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> 
     }
 
     @Override
-    public void hideLoading() {
-        super.hideLoading();
+    public void showNoData() {
+        super.showNoData();
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
     }
 
     @Override
@@ -38,7 +43,7 @@ public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> 
 
     @Override
     public void showError(String msg) {
-        super.showError();
+        super.showError(msg);
     }
 
     @Override

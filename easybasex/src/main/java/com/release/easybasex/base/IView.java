@@ -12,9 +12,9 @@ public interface IView {
     void showLoading();
 
     /**
-     * 隐藏加载
+     * 隐藏
      */
-    void hideLoading();
+    void hide();
 
     /**
      * 显示提示信息
@@ -30,4 +30,9 @@ public interface IView {
      * 显示错误信息
      */
     void showError(String msg);
+
+    /**
+     *  显示没有数据
+     */
+    void showNoData();
 }
