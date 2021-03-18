@@ -1,28 +1,32 @@
 package com.release.simplex;
 
 import android.Manifest;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.entity.node.BaseNode;
-import com.orhanobut.logger.Logger;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.release.cameralibrary.PermissionUtils;
 import com.release.easybasex.base.BaseMvpActivity;
-import com.release.easybasex.utils.StatusBarUtil;
-import com.release.easybasex.widget.dialog.TipLoadDialog;
 import com.release.simplex.mvp.contract.MainContract;
 import com.release.simplex.mvp.model.FirstNode;
 import com.release.simplex.mvp.model.MenuBean;
 import com.release.simplex.mvp.model.SecondNode;
 import com.release.simplex.mvp.model.ThirdNode;
 import com.release.simplex.mvp.presenter.MainPersenter;
+import com.release.simplex.ui.act.DownLoadActivity;
+import com.release.simplex.ui.act.IjkPlayerActivity;
+import com.release.simplex.ui.act.ImageViewScaleTypeActivity;
+import com.release.simplex.ui.act.ScreenshotAndWindowFloatActivity;
+import com.release.simplex.ui.act.ThreadActivity;
+import com.release.simplex.ui.act.TimerAnimationActivity;
+import com.release.simplex.ui.act.VLayoutActivity;
+import com.release.simplex.ui.act.WebViewPlusActivity;
 import com.release.simplex.ui.adapter.DataAdapter;
+import com.release.simplex.ui.fragment.TestFragment;
 import com.release.simplex.utils.MenuUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -31,7 +35,11 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.release.simplex.utils.Constants.PAGE;
 
@@ -47,6 +55,7 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
     RecyclerView mRvList;
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout mRefreshLayout;
+
     private DataAdapter mAdapter;
 
     @Override
@@ -107,6 +116,61 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
                 mPresenter.requestData(true);
             }
         });
+
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                int itemViewType = adapter.getItemViewType(position);
+                switch (itemViewType) {
+                    case 1:
+                        mAdapter.expandOrCollapse(position, true, true, 110);
+                        break;
+                    case 2:
+                        List<SecondNode> data2 = (List<SecondNode>) adapter.getData();
+                        SecondNode secondNode = data2.get(position);
+                        if (secondNode.isExpanded()) {
+                            //收起
+                            mAdapter.collapse(position);
+                        } else {
+                            //打开
+                            mAdapter.expandAndCollapseOther(position);
+                        }
+                        switch (secondNode.getTitle()) {
+                            case "截图与悬浮窗":
+                                startAct(ScreenshotAndWindowFloatActivity.class);
+                                break;
+                            case "WebViewPlus":
+                                startAct(WebViewPlusActivity.class);
+                                break;
+                            case "VLayout使用":
+                                startAct(VLayoutActivity.class);
+                                break;
+                            case "下载":
+                                startAct(DownLoadActivity.class);
+                                break;
+                            case "单线程复用":
+                                startAct(ThreadActivity.class);
+                                break;
+                            case "ijk内核播放器":
+                                startAct(IjkPlayerActivity.class);
+                                break;
+                            case "ImageView的ScaleType":
+                                startAct(ImageViewScaleTypeActivity.class);
+                                break;
+                        }
+                        break;
+                    case 3:
+                        List<ThirdNode> data3 = (List<ThirdNode>) adapter.getData();
+                        ThirdNode thirdNode = data3.get(position);
+                        switch (thirdNode.getTitle()) {
+                            case "送礼物倒计时按钮":
+                                startAct(TimerAnimationActivity.class);
+                                break;
+                        }
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -153,4 +217,5 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }

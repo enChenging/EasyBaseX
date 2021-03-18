@@ -47,6 +47,11 @@ public abstract class BaseMvpFragment<V extends IView, P extends IPresenter<V>> 
     }
 
     @Override
+    public void showNoData() {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (mPresenter != null) {

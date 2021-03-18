@@ -1,5 +1,6 @@
 package com.release.easybasex.base;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -32,6 +33,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.ButterKnife;
 
@@ -48,7 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
     protected StateLayout mStateLayout;
     protected IToolBar mTopBar;
     private TipLoadDialog mTipLoadDialog;
-
+    protected Fragment currentFragment = new Fragment();
     public boolean useEventBus() {
         return false;
     }
@@ -212,7 +215,24 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
         super.onPostCreate(savedInstanceState, persistentState);
     }
 
-    public void hide() {
+    protected FragmentTransaction switchFragment(Fragment targetFragment, int resId) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        if (!targetFragment.isAdded()) {
+            //第一次使用switchFragment()时currentFragment为null，所以要判断一下
+            if (currentFragment != null) {
+                fragmentTransaction.hide(currentFragment);
+            }
+            fragmentTransaction.add(resId, targetFragment, targetFragment.getClass().getName());
+        } else {
+            fragmentTransaction
+                    .hide(currentFragment)
+                    .show(targetFragment);
+        }
+        currentFragment = targetFragment;
+        return fragmentTransaction;
+    }
+
+    protected void hide() {
         if (mStateLayout != null) {
             mStateLayout.hide();
         }
@@ -222,14 +242,14 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
         }
     }
 
-    public void showNoData() {
+    protected void showNoData() {
         if (mStateLayout != null) {
             mStateLayout.show();
             mStateLayout.setEmptyStatus(StateLayout.STATUS_NO_DATA);
         }
     }
 
-    public void showLoading() {
+    protected void showLoading() {
         if (mStateLayout != null) {
             mStateLayout.show();
             mStateLayout.setEmptyStatus(StateLayout.STATUS_LOADING);
@@ -237,7 +257,7 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
     }
 
 
-    public void showError() {
+    protected void showError() {
         if (mStateLayout != null) {
             mStateLayout.show();
             mStateLayout.setEmptyStatus(StateLayout.STATUS_ERROR);
@@ -250,8 +270,25 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
         }
     }
 
-    public void showError(String msg) {
+    protected void showError(String msg) {
         ToastUtils.show(msg);
     }
+
+
+    protected void startAct(Class<?> cls){
+        Intent intent = new Intent(this, cls);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_right_entry, R.anim.hold);
+    }
+
+    protected void startAct(Intent intent){
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_right_entry, R.anim.hold);
+    }
+
+
+
 
 }

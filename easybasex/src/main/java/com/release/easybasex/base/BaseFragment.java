@@ -6,16 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.fragment.app.Fragment;
-
 import com.release.easybasex.R;
 import com.release.easybasex.utils.ToastUtils;
 import com.release.easybasex.widget.StateLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -25,7 +24,6 @@ import butterknife.Unbinder;
  * @Describe
  */
 public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
-
 
     /**
      * 视图是否加载完毕
@@ -51,11 +49,11 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View _view;
-        if (isOriginalLayout()){
-            _view =  LayoutInflater.from(mContext).inflate(R.layout.cyc_fragment_base, null);
+        if (isOriginalLayout()) {
+            _view = LayoutInflater.from(mContext).inflate(R.layout.cyc_fragment_base, null);
             mBaseViewFragment = _view.findViewById(R.id.ll_fragment_base_view);
             LayoutInflater.from(mContext).inflate(getLayoutId(), mBaseViewFragment, true);
-        }else{
+        } else {
             _view = inflater.inflate(getLayoutId(), container, false);
         }
         return _view;
@@ -131,27 +129,27 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
         super.onDestroyView();
     }
 
-    public void showLoading() {
+    protected void showLoading() {
         if (mStateLayout != null) {
             mStateLayout.setEmptyStatus(StateLayout.STATUS_LOADING);
             mStateLayout.show();
         }
     }
 
-    public void hide() {
+    protected void hide() {
         if (mStateLayout != null) {
             mStateLayout.hide();
         }
     }
 
-    public void showNoData() {
+    protected void showNoData() {
         if (mStateLayout != null) {
             mStateLayout.setEmptyStatus(StateLayout.STATUS_NO_DATA);
             mStateLayout.show();
         }
     }
 
-    public void showError() {
+    protected void showError() {
         if (mStateLayout != null) {
             mStateLayout.setEmptyStatus(StateLayout.STATUS_ERROR);
             mStateLayout.show();
@@ -164,7 +162,8 @@ public abstract class BaseFragment extends Fragment implements UiInterfaceFrag {
         }
     }
 
-    public void showError(String msg) {
+    protected void showError(String msg) {
         ToastUtils.show(msg);
     }
+
 }

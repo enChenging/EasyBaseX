@@ -4,8 +4,6 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
-import androidx.core.view.ViewCompat;
-
 import com.chad.library.adapter.base.entity.node.BaseNode;
 import com.chad.library.adapter.base.provider.BaseNodeProvider;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -15,6 +13,8 @@ import com.release.simplex.mvp.model.FirstNode;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import androidx.core.view.ViewCompat;
 
 /**
  * @author Mr.release
@@ -80,12 +80,6 @@ public class FirstProvider extends BaseNodeProvider {
                 imageView.setRotation(90f);
             }
         }
-    }
-
-    @Override
-    public void onClick(@NotNull BaseViewHolder helper, @NotNull View view, BaseNode data, int position) {
-        // 这里使用payload进行增量刷新（避免整个item刷新导致的闪烁，不自然）
-        getAdapter().expandOrCollapse(position, true, true, 110);
     }
 
 }
