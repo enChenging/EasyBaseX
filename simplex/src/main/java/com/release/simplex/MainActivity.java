@@ -1,7 +1,6 @@
 package com.release.simplex;
 
 import android.Manifest;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -17,6 +16,7 @@ import com.release.simplex.mvp.model.MenuBean;
 import com.release.simplex.mvp.model.SecondNode;
 import com.release.simplex.mvp.model.ThirdNode;
 import com.release.simplex.mvp.presenter.MainPersenter;
+import com.release.simplex.ui.act.AutoCompleteTextViewActivity;
 import com.release.simplex.ui.act.DownLoadActivity;
 import com.release.simplex.ui.act.IjkPlayerActivity;
 import com.release.simplex.ui.act.ImageViewScaleTypeActivity;
@@ -26,7 +26,6 @@ import com.release.simplex.ui.act.TimerAnimationActivity;
 import com.release.simplex.ui.act.VLayoutActivity;
 import com.release.simplex.ui.act.WebViewPlusActivity;
 import com.release.simplex.ui.adapter.DataAdapter;
-import com.release.simplex.ui.fragment.TestFragment;
 import com.release.simplex.utils.MenuUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -39,7 +38,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import static com.release.simplex.utils.Constants.PAGE;
 
@@ -156,6 +154,9 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
                                 break;
                             case "ImageView的ScaleType":
                                 startAct(ImageViewScaleTypeActivity.class);
+                                break;
+                            case "AutoCompleteTextView":
+                                startAct(AutoCompleteTextViewActivity.class);
                                 break;
                         }
                         break;

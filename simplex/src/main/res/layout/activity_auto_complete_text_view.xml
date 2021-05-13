@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/cl"
+    android:background="@color/Green"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.release.simplex.widget.CustomAutoCompleteTextView
+        android:id="@+id/userName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/bg_rect_white_login"
+        android:hint="请输入用户名"
+        android:paddingLeft="5dp"
+        android:singleLine="true"
+        android:textColor="#555555"
+        android:textColorHint="#555555"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

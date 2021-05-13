@@ -58,6 +58,9 @@
         <activity
             android:name=".ui.act.IjkPlayerActivity"
             android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.act.AutoCompleteTextViewActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>
