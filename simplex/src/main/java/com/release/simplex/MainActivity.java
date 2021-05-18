@@ -17,6 +17,7 @@ import com.release.simplex.mvp.model.SecondNode;
 import com.release.simplex.mvp.model.ThirdNode;
 import com.release.simplex.mvp.presenter.MainPersenter;
 import com.release.simplex.ui.act.AutoCompleteTextViewActivity;
+import com.release.simplex.ui.act.ContentProviderAcitivty;
 import com.release.simplex.ui.act.DownLoadActivity;
 import com.release.simplex.ui.act.IjkPlayerActivity;
 import com.release.simplex.ui.act.ImageViewScaleTypeActivity;
@@ -157,6 +158,9 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
                                 break;
                             case "AutoCompleteTextView":
                                 startAct(AutoCompleteTextViewActivity.class);
+                                break;
+                            case "ContentProvider":
+                                startAct(ContentProviderAcitivty.class);
                                 break;
                         }
                         break;

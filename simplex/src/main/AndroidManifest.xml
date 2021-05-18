@@ -61,6 +61,14 @@
         <activity
             android:name=".ui.act.AutoCompleteTextViewActivity"
             android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.act.ContentProviderAcitivty"
+            android:launchMode="singleTop" />
+
+        <provider
+            android:name=".utils.MyFirstContentProvider"
+            android:exported="true"
+            android:authorities="com.release.contentproviderdemo.MyFirstContentProvider" />
     </application>
 
 </manifest>
