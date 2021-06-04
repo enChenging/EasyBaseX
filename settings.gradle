@@ -1,2 +1,2 @@
 rootProject.name='EasyBaseX'
-include ':simplex', ':easybasex'
+include ':simplex', ':easybasex',':aop'

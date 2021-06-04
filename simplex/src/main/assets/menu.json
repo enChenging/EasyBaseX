@@ -15,12 +15,6 @@
           "title": "截图与悬浮窗"
         },
         {
-          "title": "WebViewPlus"
-        },
-        {
-          "title": "VLayout使用"
-        },
-        {
           "title": "下载"
         },
         {
@@ -30,10 +24,10 @@
           "title": "ijk内核播放器"
         },
         {
-          "title": "AutoCompleteTextView"
+          "title": "ContentProvider"
         },
         {
-          "title": "ContentProvider"
+          "title": "获取手机设备信息"
         }
       ]
     },
@@ -42,6 +36,15 @@
       "second": [
         {
           "title": "ImageView的ScaleType"
+        },
+        {
+          "title": "WebViewPlus"
+        },
+        {
+          "title": "VLayout使用"
+        },
+        {
+          "title": "AutoCompleteTextView"
         }
       ]
     }

@@ -169,6 +169,12 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.slide_right_entry, R.anim.hold);
+    }
+
+    @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.hold, R.anim.slide_right_exit);
@@ -279,13 +285,11 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
         Intent intent = new Intent(this, cls);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_right_entry, R.anim.hold);
     }
 
     protected void startAct(Intent intent){
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_right_entry, R.anim.hold);
     }
 
 

@@ -9,10 +9,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name="com.release.simplex.App"
@@ -69,6 +69,10 @@
             android:name=".utils.MyFirstContentProvider"
             android:exported="true"
             android:authorities="com.release.contentproviderdemo.MyFirstContentProvider" />
+
+        <activity
+            android:name=".ui.act.DeviceInfoAcitivty"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

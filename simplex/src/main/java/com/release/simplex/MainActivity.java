@@ -17,6 +17,7 @@ import com.release.simplex.mvp.model.SecondNode;
 import com.release.simplex.mvp.model.ThirdNode;
 import com.release.simplex.mvp.presenter.MainPersenter;
 import com.release.simplex.ui.act.AutoCompleteTextViewActivity;
+import com.release.simplex.ui.act.DeviceInfoAcitivty;
 import com.release.simplex.ui.act.ContentProviderAcitivty;
 import com.release.simplex.ui.act.DownLoadActivity;
 import com.release.simplex.ui.act.IjkPlayerActivity;
@@ -96,7 +97,8 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
 
     public String[] needPermissions = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE
     };
 
     @Override
@@ -161,6 +163,9 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
                                 break;
                             case "ContentProvider":
                                 startAct(ContentProviderAcitivty.class);
+                                break;
+                            case "获取手机设备信息":
+                                startAct(DeviceInfoAcitivty.class);
                                 break;
                         }
                         break;
