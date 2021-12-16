@@ -1,8 +1,13 @@
 package com.release.simplex.provider;
 
+import android.graphics.Color;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.entity.node.BaseNode;
 import com.chad.library.adapter.base.provider.BaseNodeProvider;
@@ -52,6 +57,13 @@ public class SecondProvider extends BaseNodeProvider {
             helper.setImageResource(R.id.iv_arrow, R.drawable.ic_keyboard_arrow_down_blue_24dp);
         } else {
             helper.setImageResource(R.id.iv_arrow, R.drawable.ic_keyboard_arrow_right_blue_24dp);
+        }
+        Log.i("cyc", "getSelectedItem: " + entity.getSelectedItem());
+        if (entity.getSelectedItem() == helper.getLayoutPosition()) {
+            helper.setBackgroundColor(R.id.vLayout, Color.RED);
+            entity.setSelectedItem(-1);
+        } else {
+            helper.setBackgroundColor(R.id.vLayout, Color.WHITE);
         }
     }
 }

@@ -17,6 +17,7 @@ public class SecondNode extends BaseExpandNode {
 
     private List<BaseNode> childNode;
     private String title;
+    private int selectedItem;
 
     public SecondNode(List<BaseNode> childNode, String title) {
         this.childNode = childNode;
@@ -27,6 +28,14 @@ public class SecondNode extends BaseExpandNode {
 
     public String getTitle() {
         return title;
+    }
+
+    public int getSelectedItem() {
+        return selectedItem;
+    }
+
+    public void setSelectedItem(int isCheck){
+        this.selectedItem = isCheck;
     }
 
     @Nullable

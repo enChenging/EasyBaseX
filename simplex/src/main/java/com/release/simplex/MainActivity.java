@@ -136,6 +136,8 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
                             //打开
                             mAdapter.expandAndCollapseOther(position);
                         }
+                        secondNode.setSelectedItem(position);
+                        mAdapter.notifyDataSetChanged();
                         switch (secondNode.getTitle()) {
                             case "截图与悬浮窗":
                                 startAct(ScreenshotAndWindowFloatActivity.class);
