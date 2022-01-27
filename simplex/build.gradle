@@ -105,4 +105,5 @@ dependencies {
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+    implementation 'com.tencent.tbs:tbssdk:44115'
 }

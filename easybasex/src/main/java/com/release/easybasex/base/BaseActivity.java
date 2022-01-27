@@ -63,7 +63,7 @@ public abstract class BaseActivity extends AppCompatActivity implements UiInterf
 
         TAG = this.getClass().getSimpleName();
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         initContentView(getLayoutId());
 

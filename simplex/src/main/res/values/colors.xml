@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="theme_color">#009688</color>
+
+    <color name="color9b">#A5A7A6</color>
+    <color name="page_bg">#efefef</color>
 </resources>

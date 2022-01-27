@@ -26,7 +26,9 @@ import com.release.simplex.ui.act.ScreenshotAndWindowFloatActivity;
 import com.release.simplex.ui.act.ThreadActivity;
 import com.release.simplex.ui.act.TimerAnimationActivity;
 import com.release.simplex.ui.act.VLayoutActivity;
+import com.release.simplex.ui.act.WebViewActivity;
 import com.release.simplex.ui.act.WebViewPlusActivity;
+import com.release.simplex.ui.act.WebViewX5Activity;
 import com.release.simplex.ui.adapter.DataAdapter;
 import com.release.simplex.utils.MenuUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -142,8 +144,14 @@ public class MainActivity extends BaseMvpActivity<MainContract.View, MainContrac
                             case "截图与悬浮窗":
                                 startAct(ScreenshotAndWindowFloatActivity.class);
                                 break;
+                            case "WebView":
+                                startAct(WebViewActivity.class);
+                                break;
                             case "WebViewPlus":
                                 startAct(WebViewPlusActivity.class);
+                                break;
+                            case "WebViewX5":
+                                startAct(WebViewX5Activity.class);
                                 break;
                             case "VLayout使用":
                                 startAct(VLayoutActivity.class);

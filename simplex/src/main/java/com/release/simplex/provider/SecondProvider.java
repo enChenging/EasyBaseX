@@ -58,7 +58,6 @@ public class SecondProvider extends BaseNodeProvider {
         } else {
             helper.setImageResource(R.id.iv_arrow, R.drawable.ic_keyboard_arrow_right_blue_24dp);
         }
-        Log.i("cyc", "getSelectedItem: " + entity.getSelectedItem());
         if (entity.getSelectedItem() == helper.getLayoutPosition()) {
             helper.setBackgroundColor(R.id.vLayout, Color.RED);
             entity.setSelectedItem(-1);
