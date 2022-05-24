@@ -1,5 +1,7 @@
 package com.release.simplex.ui.act;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -16,6 +18,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class DeviceInfoAcitivty extends BaseActivity {
 
@@ -43,6 +47,7 @@ public class DeviceInfoAcitivty extends BaseActivity {
                 "\n" + getAvailMemory() +
                 "\n" + getInfo() +
                 "\n" + getMacAddress() +
+                "\n" + getBluetoothAddress(this) +
                 "\n" + getCpuInfo() +
                 "\n" + getPackage() +
                 "\n" + isRoot();
@@ -157,11 +162,33 @@ public class DeviceInfoAcitivty extends BaseActivity {
      * 只有手机开启wifi才能获取到mac地址
      */
     private String getMacAddress() {
-        String result = "";
         WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        result = wifiInfo.getMacAddress();
-        return "手机macAdd: " + result;
+        return "手机macAdd: " + wifiInfo.getMacAddress();
+    }
+
+
+    /**
+     * 获取本机蓝牙地址, 确保蓝牙已开启，关闭状态无法获取到
+     */
+    private String getBluetoothAddress(Context context) {
+        try {
+            BluetoothAdapter bluetoothAdapter = ((BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter();
+            Field field = bluetoothAdapter.getClass().getDeclaredField("mService");
+            field.setAccessible(true);
+            Object bluetoothManagerService = field.get(bluetoothAdapter);
+            if (bluetoothManagerService == null)  return "蓝牙地址:" + null;
+            Method method = bluetoothManagerService.getClass().getMethod("getAddress");
+            Object address = method.invoke(bluetoothManagerService);
+            if (address != null && address instanceof String) {
+                return "蓝牙地址: " + address;
+            } else {
+                return "蓝牙地址:" + null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
